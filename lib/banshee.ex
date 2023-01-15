@@ -13,8 +13,8 @@ defmodule Banshee do
     {:ok, @initial_state}
   end
 
-  def default_alarm_file, do: Application.get_env(:banshee, :default_alarm_file)
-  def alarm!, do: play(default_alarm_file())
+  @default_alarm_file Path.expand("../assets/alarm.mp3", __DIR__)
+  def alarm!, do: play(@default_alarm_file)
   def play(file) when is_binary(file), do: play(__MODULE__, file)
   def play(pid, file) do
     GenServer.call(pid, {:alarm, true, file})
@@ -79,6 +79,13 @@ defmodule Banshee do
     %{state | ports: [port | ports], voice: voice}
   end
 
-  defp player_executable, do: Application.get_env(:banshee, :player_executable)
-  defp tts_executable, do: Application.get_env(:banshee, :tts_executable)
+  @default_player_executable "afplay"
+  defp player_executable do
+    Application.get_env(:banshee, :player_executable) || @default_player_executable
+  end
+
+  @default_tts_executable "espeak"
+  defp tts_executable do
+    Application.get_env(:banshee, :tts_executable) || @default_tts_executable
+  end
 end
