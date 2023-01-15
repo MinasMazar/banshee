@@ -5,7 +5,6 @@ defmodule Banshee do
   use GenServer
 
   @initial_state %{ports: [], voice: "default", outfile: nil}
-  @alarm_file Path.expand("../../assets/alarm.mp3", __ENV__.file)
   def start_link(_opts) do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
@@ -14,7 +13,8 @@ defmodule Banshee do
     {:ok, @initial_state}
   end
 
-  def alarm!, do: play(@alarm_file)
+  def default_alarm_file, do: Application.get_env(:banshee, :default_alarm_file)
+  def alarm!, do: play(default_alarm_file())
   def play(file) when is_binary(file), do: play(__MODULE__, file)
   def play(pid, file) do
     GenServer.call(pid, {:alarm, true, file})
