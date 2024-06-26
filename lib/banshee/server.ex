@@ -1,9 +1,9 @@
-defmodule Banshee.Player do
+defmodule Banshee.Server do
   use GenServer
 
   @initial_state %{ports: %{}}
 
-  def start_link do
+  def start_link(_) do
     GenServer.start_link(__MODULE__, @initial_state, name: __MODULE__)
   end
 
