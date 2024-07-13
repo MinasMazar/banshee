@@ -9,4 +9,9 @@ defmodule Banshee do
   def play do
     play(@default_sound_file)
   end
+
+  @default_player_executable "afplay"
+  def player_executable do
+    Application.get_env(:banshee, :player_executable, @default_player_executable)
+  end
 end

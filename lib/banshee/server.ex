@@ -1,4 +1,5 @@
 defmodule Banshee.Server do
+  import Banshee
   use GenServer
 
   @initial_state %{ports: %{}}
@@ -40,10 +41,5 @@ defmodule Banshee.Server do
     {caller, ports} = Map.pop(state.ports, down_port)
     with {pid, _ref} <- caller, do: send(pid, :play_ended)
     {:noreply, %{state | ports: ports}}
-  end
-
-  @default_player_executable "afplay"
-  defp player_executable do
-    Application.get_env(:banshee, :player_executable, @default_player_executable)
   end
 end
