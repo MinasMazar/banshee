@@ -6,7 +6,7 @@ defmodule Banshee do
   defdelegate play(file, mode), to: Banshee.Server
 
   @default_sound_file Path.expand("../../assets/banshee_scream.wav", __ENV__.file)
-  def play do
+  def scream! do
     play(@default_sound_file)
   end
 
