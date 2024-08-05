@@ -4,6 +4,7 @@ defmodule Banshee do
   """
   defdelegate play(file), to: Banshee.Server
   defdelegate play(file, mode), to: Banshee.Server
+  defdelegate stop(), to: Banshee.Server
 
   def scream! do
     Application.get_env(:banshee, :alarm_file) |> play()
