@@ -1,0 +1,19 @@
+# Banshee
+
+```elixir
+Mix.install([
+  {:banshee, ">= 0.1.0", git: "https://git.sr.ht/~minasmazar/banshee"}
+],
+config: [
+  banshee: [player_executable: "/usr/local/bin/mpv"]
+])
+```
+
+## Usage
+
+```elixir
+file = Path.expand("~/test.mp3")
+Banshee.play(file)
+Process.sleep(10_000)
+Banshee.stop()
+```
