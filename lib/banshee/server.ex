@@ -37,6 +37,10 @@ defmodule Banshee.Server do
   end
 
   @impl true
+  def handle_info({_port, {:data, _out}}, state) do
+    {:noreply, state}
+  end
+
   def handle_info({:DOWN, _ref, :port, down_port, _reason}, state) do
     {caller, ports} = Map.pop(state.ports, down_port)
     with {pid, _ref} <- caller, do: send(pid, :play_ended)
