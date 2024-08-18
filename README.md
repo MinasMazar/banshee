@@ -19,3 +19,13 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/banshee>.
 
+## Configuration
+
+```elixir
+# config/runtime.exs
+
+config :banshee,
+  alarm_file: Path.expand("../../assets/banshee_scream.wav", __ENV__.file),
+  player_executable: "afplay",
+  tts_executable: "espeak"
+```
